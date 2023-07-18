@@ -65,7 +65,7 @@ Rectangle {
         },
         State {
             name: "SELECTED"
-            PropertyChanges { target: selectionItem;    opacity : 0.8;   scale : 1.    }
+            PropertyChanges { target: selectionItem;    opacity : 0.8;   scale : 1. ;     z: -1   }
         }
     ]
     transitions: [
