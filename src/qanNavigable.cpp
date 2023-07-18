@@ -265,6 +265,23 @@ void    Navigable::setDragActive(bool dragActive) noexcept
     }
 }
 
+void Navigable::setEnableDragX(bool enableDragX) noexcept
+{
+    if (_enableDragX != enableDragX) {
+        _enableDragX = enableDragX;
+        emit enableDragXChanged();
+    }
+}
+
+void Navigable::setEnableDragY(bool enableDragY) noexcept
+{
+    if (_enableDragY != enableDragY) {
+        _enableDragY = enableDragY;
+        emit enableDragYChanged();
+    }
+}
+
+
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 void    Navigable::geometryChanged(const QRectF& newGeometry, const QRectF& oldGeometry)
 #else
@@ -352,8 +369,13 @@ void    Navigable::mouseMoveEvent(QMouseEvent* event)
         const QPointF delta = _lastPan - event->localPos();
         const auto p = QPointF{_containerItem->x(),
                                _containerItem->y()} - delta;
-        _containerItem->setX(p.x());
-        _containerItem->setY(p.y());
+
+        if (_enableDragX) {
+            _containerItem->setX(p.x());
+        }
+        if (_enableDragY) {
+            _containerItem->setY(p.y());
+        }
         emit containerItemModified();
         navigableContainerItemModified();
         _panModified = true;

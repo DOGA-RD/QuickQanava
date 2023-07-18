@@ -318,16 +318,54 @@ protected:
 public:
     //! True when the navigable conctent area is actually dragged.
     Q_PROPERTY(bool dragActive READ getDragActive WRITE setDragActive NOTIFY dragActiveChanged FINAL)
+
     //! \copydoc dragActive
     inline bool getDragActive() const noexcept { return _dragActive; }
     //! \copydoc dragActive
     void        setDragActive(bool dragActive) noexcept;
+
 private:
     //! \copydoc dragActive
     bool        _dragActive{false};
+
 signals:
     //! \copydoc dragActive
     void        dragActiveChanged();
+
+public:
+    //! True when the X direction can be dragged (default: true)
+    Q_PROPERTY(bool enableDragX READ getEnableDragX WRITE setEnableDragX NOTIFY enableDragXChanged FINAL)
+
+    //! \copydoc enableDragX
+    inline bool getEnableDragX() const noexcept { return _enableDragX; }
+    //! \copydoc enableDragX
+    void        setEnableDragX(bool enableDragX) noexcept;
+
+private:
+    //! \copydoc enableDragX
+    bool        _enableDragX{true};
+
+signals:
+    //! \copydoc enableDragX
+    void        enableDragXChanged();
+
+public:
+    //! True when the Y direction can be dragged (default: true)
+    Q_PROPERTY(bool enableDragY READ getEnableDragY WRITE setEnableDragY NOTIFY enableDragYChanged FINAL)
+
+    //! \copydoc enableDragY
+    inline bool getEnableDragY() const noexcept { return _enableDragY; }
+    //! \copydoc enableDragY
+    void        setEnableDragY(bool enableDragX) noexcept;
+
+private:
+    //! \copydoc enableDragY
+    bool        _enableDragY{true};
+
+signals:
+    //! \copydoc enableDragY
+    void        enableDragYChanged();
+
 
 protected:
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
