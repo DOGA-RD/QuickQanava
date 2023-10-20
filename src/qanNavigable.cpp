@@ -70,6 +70,14 @@ void    Navigable::setNavigable(bool navigable) noexcept
     }
 }
 
+void Navigable::setZoomable(bool zoomable) noexcept
+{
+    if (zoomable != _zoomable) {
+        _zoomable = zoomable;
+        emit zoomableChanged();
+    }
+}
+
 void    Navigable::centerOn(QQuickItem* item)
 {
     if (_containerItem == nullptr ||
@@ -462,7 +470,7 @@ void    Navigable::mouseReleaseEvent(QMouseEvent* event)
 
 void    Navigable::wheelEvent(QWheelEvent* event)
 {
-    if (getNavigable()) {
+    if (getNavigable() && getZoomable()) {
         qreal zoomFactor = (event->angleDelta().y() > 0. ? _zoomIncrement : -_zoomIncrement);
 #if (QT_VERSION >= QT_VERSION_CHECK(5,14,0))
         zoomOn(event->position(), getZoom() + zoomFactor);
