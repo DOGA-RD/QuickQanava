@@ -118,6 +118,22 @@ signals:
     //! \sa navigable
     void            navigableChanged();
 
+
+public:
+    /*! \brief Enable or disable zoom (zoom is enabled by default).
+     */
+    Q_PROPERTY(bool zoomable READ getZoomable WRITE setZoomable NOTIFY navigableChanged FINAL)
+    //! \sa navigable
+    inline bool     getZoomable() const noexcept { return _zoomable; }
+    //! \sa navigable
+    void            setZoomable(bool zoomable) noexcept;
+private:
+    //! \copydoc navigable
+    bool            _zoomable = true;
+signals:
+    //! \sa navigable
+    void            zoomableChanged();
+
 public:
     /*! \brief Parent container for area child items.
      *
