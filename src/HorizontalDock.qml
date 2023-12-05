@@ -39,10 +39,19 @@ RowLayout {
     id: root
     spacing: 15
     z: 1.5 // Selection item z=1.0, dock must be on top of selection
+
+    // Note 20231205: Apply correction done in file VerticalDock.qml :
+    // Changing dock position actually do not modify
+    // docked port position, so no edge update is triggered, force update
+    // manually (fix #145)
+    onXChanged: hostNodeItem.updatePortsEdges()
+    onYChanged: hostNodeItem.updatePortsEdges()
+
     states: [
         State {
             name: "top"
-            when: hostNodeItem && dockType === Qan.NodeItem.Top
+            when: hostNodeItem !== null && hostNodeItem !== undefined &&
+                  dockType === Qan.NodeItem.Top
 
             AnchorChanges {
                 target: root
@@ -59,7 +68,8 @@ RowLayout {
         },
         State {
             name: "bottom"
-            when: hostNodeItem && dockType === Qan.NodeItem.Bottom
+            when: hostNodeItem !== null && hostNodeItem !== undefined &&
+                  dockType === Qan.NodeItem.Bottom
 
             AnchorChanges {
                 target: root
