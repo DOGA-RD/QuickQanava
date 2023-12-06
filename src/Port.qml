@@ -38,7 +38,7 @@ import QuickQanava 2.0 as Qan
 Qan.PortItem {
     id: portItem
     width: 16
-    height: 16
+    height: width
 
     states: [
         State {
@@ -127,6 +127,7 @@ Qan.PortItem {
         z: 2
         width: label.implicitWidth
         height: label.implicitHeight
+        visible: (label.text !== "")
 
         Label {
             id: label
