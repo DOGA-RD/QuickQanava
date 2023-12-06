@@ -33,6 +33,7 @@
 //-----------------------------------------------------------------------------
 
 import QtQuick          2.7
+import QtQuick.Controls 2.1
 import QtQuick.Shapes   1.0
 
 import QuickQanava        2.0 as Qan
@@ -47,5 +48,22 @@ Qan.EdgeItem {
         anchors.fill: parent
         edgeItem: parent
         color: parent.color
+    }
+    Pane {
+        id: labelPane
+        anchors.centerIn: parent
+        opacity: 0.80
+        padding: 0
+        z: 2
+        width: label.implicitWidth
+        height: label.implicitHeight
+        visible: (label.text !== "")
+
+        Label {
+            id: label
+            z: 3
+            text: edgeItem.edge.label
+            visible: true
+        }
     }
 }
